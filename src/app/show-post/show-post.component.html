@@ -6,7 +6,6 @@
     </div>
     <p class="mb-1">{{post.description}}</p>
     <div class="d-flex w-100 justify-content-between">
-      <small>read more...</small>
       <div>
         <i title="Edit" class="fas fa-edit" (click)="editPost(post)" aria-hidden="true"></i>
         <i (click)="setDelete(post)" data-toggle="modal" data-target="#deleteModal" title="Delete"
@@ -18,7 +17,6 @@
 
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -30,12 +28,12 @@
         </button>
       </div>
       <div class="modal-body">
-        Are you sure ?
+        Вы уверены?
       </div>
       <div class="modal-footer">
-        <button #closeBtn (click)="unsetDelete()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+        <button #closeBtn (click)="unsetDelete()" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
         </button>
-        <button (click)="deletePost()" type="button" class="btn btn-primary">Delete</button>
+        <button (click)="deletePost()" type="button" class="btn btn-primary">Удалить</button>
       </div>
     </div>
   </div>
