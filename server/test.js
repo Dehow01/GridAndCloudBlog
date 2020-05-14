@@ -1,6 +1,6 @@
 import chaiHttp from "chai-http";
 import chai from  "chai";
-const app = require("../server");
+const app = require("./app");
 
 chai.use(chaiHttp);
 chai.should();
@@ -16,43 +16,42 @@ describe("Server", () => {
                     done();
                 });
         });
-        // it("should get all published notes", (done) => {
-        //     chai.request(app)
-        //         .post('/api/tutorials/published')
-        //         .end((err, res) => {
-        //             res.should.have.status(200);
-        //             res.body.should.be.a('array');
-        //             done();
-        //         });
-        // });
-        // it("should get non-existent note", (done) => {
-        //     const id = 1;
-        //     chai.request(app)
-        //         .get(`/api/tutorials/${id}`)
-        //         .end((err, res) => {
-        //             res.should.have.status(500);
-        //             done();
-        //         });
-        // });
-        // it("should response create note", (done) => {
-        //     const id = 1;
-        //     chai.request(app)
-        //         .post('/api/tutorials/${id}')
-        //         .send({"title":"test",
-        //             "description": "test"
-        //         })
-        //         .end((err, res) => {
-        //             done();
-        //         });
-        // });
-        // it("should response delete nonexistent note", (done) => {
-        //     chai.request(app)
-        //         .delete('/api/tutorials/1')
-        //         .end((err, res) => {
-        //             res.should.have.status(500);
-        //             done();
-        //         });
-        // });
+        it("auth", (done) => {
+            chai.request(app)
+                .post('/api/user/login')
+                .send({ "name": "danil", "username": "dehow", "password": "mail32544"})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    done();
+                });
+        });
+      it("auth not user", (done) => {
+        chai.request(app)
+          .post('/api/user/login')
+          .send({ "name": "123", "username": "123", "password": "mail32544"})
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+      it("create post", (done) => {
+        chai.request(app)
+          .post('/api/post/createPost')
+          .send({ "title": "123", "description": "123"})
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+      it("delete post", (done) => {
+        chai.request(app)
+          .post('/api/post/deletePost')
+          .send({ "_id": "123"})
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
 
     });
 });
